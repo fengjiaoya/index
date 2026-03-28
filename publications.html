@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Publications — Fengjiao Tu</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#ffffff;--text:#1c1c1c;--muted:#6b6b6b;--accent:#00853E;--accent-hover:#006B32;--accent-light:#e6f4ed;--border:#e2ddd6;--nav-h:54px;--max-w:880px;}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        html{scroll-behavior:smooth;}
+        body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased;}
+
+        /* NAV */
+        nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);height:var(--nav-h);}
+        .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 1.5rem;height:100%;display:flex;align-items:center;}
+        .nav-brand{font-family:'EB Garamond',serif;font-size:18px;font-weight:600;color:var(--text);text-decoration:none;margin-right:auto;letter-spacing:-.01em;}
+        .nav-brand:hover{color:var(--accent);}
+        .nav-links{display:flex;align-items:center;}
+        .nav-links a{color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:400;padding:5px 11px;border-radius:5px;transition:color .15s,background .15s;}
+        .nav-links a:hover{color:var(--accent);background:var(--accent-light);}
+        .nav-links a.active{color:var(--accent);font-weight:500;}
+        .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+        .nav-toggle span{display:block;width:22px;height:2px;background:var(--text);margin:4px 0;}
+
+        /* PAGE */
+        .page{max-width:var(--max-w);margin:0 auto;padding:2.5rem 1.5rem 5rem;}
+        .page-banner{font-family:'EB Garamond',serif;font-size:2rem;font-weight:500;color:var(--text);margin-bottom:.4rem;letter-spacing:-.02em;}
+        .page-sub{color:var(--muted);font-size:13.5px;margin-bottom:2.5rem;}
+
+        /* YEAR GROUP */
+        .year-group{margin-bottom:2.5rem;}
+        .year-label{font-family:'EB Garamond',serif;font-size:1.5rem;font-weight:500;color:var(--text);margin-bottom:.8rem;padding-bottom:.35rem;border-bottom:2px solid var(--accent);display:inline-block;letter-spacing:-.01em;}
+
+        /* BADGES */
+        .badge{display:inline-block;font-size:11px;font-weight:500;padding:2px 7px;border-radius:3px;letter-spacing:.03em;vertical-align:middle;margin-right:4px;}
+        .badge-review{background:#fff3e6;color:#b85c00;}
+        .badge-accepted{background:#e6f4ed;color:#006B32;}
+        .badge-invited{background:#f3e8f7;color:#6b21a8;}
+        .badge-if{background:#f0f0f0;color:#555;font-weight:400;}
+        .badge-type{background:#f0f0f0;color:#444;font-weight:400;}
+
+        /* PUB ITEM */
+        .pub-list{list-style:none;display:flex;flex-direction:column;}
+        .pub-item{display:grid;grid-template-columns:120px 1fr;gap:1rem;padding:1rem 0;border-bottom:1px solid #ede9e2;align-items:start;}
+        .pub-item:last-child{border-bottom:none;}
+
+        /* THUMBNAIL */
+        .pub-thumb{width:120px;height:90px;border-radius:4px;border:1px solid var(--border);overflow:hidden;flex-shrink:0;}
+        .pub-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+        .pub-thumb-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f7faf8;}
+        .pub-thumb-placeholder svg{width:28px;height:28px;opacity:.5;}
+
+        /* PUB CONTENT */
+        .pub-title{font-weight:500;font-size:14.5px;color:var(--text);margin-bottom:3px;line-height:1.5;}
+        .pub-title a{color:var(--text);text-decoration:none;}
+        .pub-title a:hover{color:var(--accent);}
+        .pub-meta{color:var(--muted);font-size:13.5px;line-height:1.6;margin-bottom:3px;}
+        .pub-meta em{font-style:italic;}
+        .pub-meta .me{font-weight:700;color:var(--accent);}
+        .pub-venue{font-size:13px;color:var(--muted);margin-bottom:7px;line-height:1.5;}
+        .pub-venue em{font-style:italic;}
+        /* PDF link inline after venue */
+        .pub-venue .pdf-link{color:var(--accent);font-size:12px;text-decoration:none;margin-left:6px;font-weight:500;}
+        .pub-venue .pdf-link:hover{text-decoration:underline;}
+
+
+
+        footer{text-align:center;padding:1.8rem 1.5rem;color:var(--muted);font-size:13px;border-top:1px solid var(--border);}
+        footer a{color:var(--accent);text-decoration:none;}
+
+        @media(max-width:640px){
+            .nav-links{display:none;flex-direction:column;position:absolute;top:var(--nav-h);left:0;right:0;background:#fff;border-bottom:1px solid var(--border);padding:.8rem 1rem;}
+            .nav-links.open{display:flex;}
+            .nav-toggle{display:block;}
+            .pub-item{grid-template-columns:90px 1fr;gap:.7rem;}
+            .pub-thumb{width:90px;height:68px;}
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">Fengjiao Tu</a>
+                <div class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="publications.html" class="active">Publications</a>
+            <a href="teaching.html">Teaching</a>
+            <a href="service.html">Service</a>
+            <a href="collaborators.html">People</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+
+<main class="page">
+    <h1 class="page-banner">Publications</h1>
+    <p class="page-sub"><strong>Tu, F.</strong> is bolded throughout. Paper links go to published versions or preprints.</p>
+
+    <!-- SHORTHAND THUMB -->
+    <template id="thumb-tpl">
+        <div class="pub-thumb"><div class="pub-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="#00853E" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div></div>
+    </template>
+
+    <!-- ══ Under Review ══ -->
+    <div class="year-group">
+        <div class="year-label">Under Review</div>
+        <ul class="pub-list">
+
+            <li class="pub-item">
+                <div class="pub-thumb"><div class="pub-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="#00853E" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div></div>
+                <div>
+                    <div class="pub-title"><span class="badge badge-review">Under Review</span>A Systematic Review of Methodological Tensions in Automated Community of Inquiry Analysis</div>
+                    <div class="pub-meta"><span class="me">Tu, F.</span>, Yu, J. H., Anderson, T., Hsieh, C. J., Kim, H., Dong, L., Chen, H., Watson, S. L., &amp; Kinshuk.</div>
+                    <div class="pub-venue"><em>Review of Educational Research</em> <span class="badge badge-if">IF 7.4 · 5-Yr IF 15.4 · h5 86</span>
+                        <a href="#" class="pdf-link">[Paper]</a>
+                    </div>
+</div>
+            </li>
+
+
+            <li class="pub-item">
+                <div class="pub-thumb"><div class="pub-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="#00853E" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div></div>
+                <div>
+                    <div class="pub-title"><span class="badge badge-review">Under Review</span>Measuring Cognitive Presence in Online Discussions: Automated Detection and Instructional Insights from a MOOC Context</div>
+                    <div class="pub-meta">Yu, J. H., <span class="me">Tu, F.</span>, Chen, H., Ding, J., Hsieh, C. J., Dong, L., Kim, H., &amp; Watson, S. L.</div>
+                    <div class="pub-venue"><em>Educational Technology Research and Development</em> <span class="badge badge-if">IF 5.3 · h5 83</span>
+                        <a href="#" class="pdf-link">[Paper]</a>
+                    </div>
+</div>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- ══ 2026 ══ -->
+    <div class="year-group">
+        <div class="year-label">2026</div>
+        <ul class="pub-list">
+
+            <li class="pub-item">
+                <div class="pub-thumb"><div class="pub-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="#00853E" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div></div>
+                <div>
+                    <div class="pub-title"><span class="badge badge-accepted">Accepted</span><span class="badge badge-type">Journal</span>Structured Flexibility in Microcredentials: A Temporal Analysis of Self-Regulated Achievement Pathways</div>
+                    <div class="pub-meta">Yu, J. H., <span class="me">Tu, F.</span>, &amp; Yelamar, K. S.</div>
+                    <div class="pub-venue"><em>Computers &amp; Education</em> <span class="badge badge-if">IF 8.9 · h5 101</span>
+                        <a href="#" class="pdf-link">[Paper]</a>
+                    </div>
+</div>
+            </li>
+
+            <li class="pub-item">
+                <div class="pub-thumb"><div class="pub-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="#00853E" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div></div>
+                <div>
+                    <div class="pub-title"><span class="badge badge-accepted">Accepted</span><span class="badge badge-type">Journal</span>Rethinking Engagement: How Active Lurkers and Selective Completers Validate New Pathways to Professional MOOC Success</div>
+                    <div class="pub-meta">Yu, J. H., Wilhoit, H. Y., &amp; <span class="me">Tu, F.</span></div>
+                    <div class="pub-venue"><em>Smart Learning Environments</em> <span class="badge badge-if">IF 4.4 · h5 38</span>
+                        <a href="#" class="pdf-link">[Paper]</a>
+                    </div>
+</div>
+            </li>
+
+            <li class="pub-item">
+                <div class="pub-thumb"><div class="pub-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="#00853E" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div></div>
+                <div>
+                    <div class="pub-title"><span class="badge badge-accepted">Poster</span>Beyond Interaction: Validating New Pathways to Success in MOOC-based Microcredentials</div>
+                    <div class="pub-meta">Yu, J. H., Wilhoit, H., &amp; <span class="me">Tu, F.</span></div>
+                    <div class="pub-venue"><em>The 16th International Learning Analytics and Knowledge Conference (LAK26)</em>
+                        <a href="#" class="pdf-link">[Paper]</a>
+                    </div>
+</div>
+            </li>
+
+            <li class="pub-item">
+                <div class="pub-thumb"><div class="pub-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="#00853E" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div></div>
+                <div>
+                    <div class="pub-title"><span class="badge badge-accepted">Poster</span>Measuring Cognitive Presence in Online Discussions: Interpretable AI and Instructional Insights from a MOOC Context</div>
+                    <div class="pub-meta">Yu, J. H., <span class="me">Tu, F.</span>, Chen, H., Ding, J., Dong, L., Hsieh, C. J., Kim, H., &amp; Watson, S. L.</div>
+                    <div class="pub-venue"><em>The 2026 International Conference of the Learning Sciences (ICLS)</em>
+                        <a href="#" class="pdf-link">[Paper]</a>
+                    </div>
+</div>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- ══ 2025 ══ -->
+    <div class="year-group">
+        <div class="year-label">2025</div>
+        <ul class="pub-list">
+
+            <li class="pub-item">
+                <div class="pub-thumb"><img src="images/papers/2025-CSI.png" alt="paper thumbnail" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"></div>
+                <div>
+                    <div class="pub-title"><span class="badge badge-type">Journal</span>How AI Agents Transform Reflective Practices: A Three-Semester Comparative Study in Socially Shared Regulation of Learning</div>
+                    <div class="pub-meta">Zheng, Y., <span class="me">Tu, F.</span>, Shu, F., Shang, C., Chen, L., &amp; Meng, J.</div>
+                    <div class="pub-venue"><em>Computer Standards &amp; Interfaces</em>, 104094. <span class="badge badge-if">IF 3.1 · h5 80</span>
+                        <a href="#" class="pdf-link">[Paper]</a>
+                    </div>
+</div>
+            </li>
+
+            <li class="pub-item">
+                <div class="pub-thumb"><div class="pub-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="#00853E" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div></div>
+                <div>
+                    <div class="pub-title"><span class="badge badge-type">Journal</span>Unpacking the Effects of Role Assignment on Interaction Processes in Socially Shared Regulation of Learning: A Multi-Method Approach</div>
+                    <div class="pub-meta">Zheng, Y., <span class="me">Tu, F.</span>, Shang, C., Meng, J., &amp; Zhang, S.</div>
+                    <div class="pub-venue"><em>Journal of Educational Computing Research</em> <span class="badge badge-if">IF 4.9 · h5 61</span>
+                        <a href="#" class="pdf-link">[Paper]</a>
+                    </div>
+</div>
+            </li>
+
+            <li class="pub-item">
+                <div class="pub-thumb"><img src="images/papers/eit-pbl.png" alt="paper thumbnail" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"></div>
+                <div>
+                    <div class="pub-title"><span class="badge badge-type">Journal</span>Exploring the Influence of Regulated Learning Processes on Learners' Prestige in Project-Based Learning</div>
+                    <div class="pub-meta"><span class="me">Tu, F.</span>, Wu, L., Kinshuk, Ding, J., &amp; Chen, H.</div>
+                    <div class="pub-venue"><em>Education and Information Technologies</em>, 30(2), 2299–2329. <span class="badge badge-if">IF 5.4 · h5 97</span>
+                        <a href="https://link.springer.com/article/10.1007/s10639-024-12870-1" class="pdf-link" target="_blank">[Paper]</a>
+                    </div>
+                    </div>
+</div>
+            </li>
+
+            <li class="pub-item">
+                <div class="pub-thumb"><div class="pub-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="#00853E" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div></div>
+                <div>
+                    <div class="pub-title"><span class="badge badge-accepted">Accepted</span><span class="badge badge-type">Journal</span>Engagement Pathways and Success Factors in a MOOC Certification Program</div>
+                    <div class="pub-meta">Yu, J., <span class="me">Tu, F.</span>, Wilhoit, H., &amp; Kamini, S.</div>
+                    <div class="pub-venue"><em>The Internet and Higher Education</em> <span class="badge badge-if">IF 6.8 · h5 124</span>
+                        <a href="#" class="pdf-link">[Paper]</a>
+                    </div>
+</div>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- ══ 2024 ══ -->
+    <div class="year-group">
+        <div class="year-label">2024</div>
+        <ul class="pub-list">
+
+            <li class="pub-item">
+                <div class="pub-thumb"><img src="images/papers/eit-online.png" alt="paper thumbnail" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"></div>
+                <div>
+                    <div class="pub-title"><span class="badge badge-type">Journal</span>Examining Factors Influencing Online Adult Learners' Satisfaction with Blended Synchronous Learning</div>
+                    <div class="pub-meta">Shu, F., Liu, Q., Wang, Q., <span class="me">Tu, F.</span>, Li, H., &amp; Zhao, C.</div>
+                    <div class="pub-venue"><em>Education and Information Technologies</em>, 1–24. <span class="badge badge-if">IF 6.8 · h5 124</span>
+                        <a href="#" class="pdf-link">[Paper]</a>
+                    </div>
+</div>
+            </li>
+
+            <li class="pub-item">
+                <div class="pub-thumb"><img src="images/papers/dimensionandtool-aitest.png" alt="paper thumbnail" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"></div>
+                <div>
+                    <div class="pub-title"><span class="badge badge-invited">Invited</span><span class="badge badge-type">Conference</span>A Survey on Data Quality Dimensions and Tools for Machine Learning</div>
+                    <div class="pub-meta">Zhou, Y., <span class="me">Tu, F.</span>, Sha, K., Ding, J., &amp; Chen, H.</div>
+                    <div class="pub-venue"><em>2024 IEEE International Conference on Artificial Intelligence Testing (AITest)</em>, pp. 120–131.
+                        <a href="https://arxiv.org/abs/2406.19614" class="pdf-link" target="_blank">[Paper]</a>
+                    </div>
+</div>
+            </li>
+
+            <li class="pub-item">
+                <div class="pub-thumb"><div class="pub-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="#00853E" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div></div>
+                <div>
+                    <div class="pub-title"><span class="badge badge-type">Book Chapter</span>Data Quality: Models, Measures, and Tools</div>
+                    <div class="pub-meta">Chen, H., Sha, K., Zhou, Y., &amp; <span class="me">Tu, F.</span></div>
+                    <div class="pub-venue">In <em>Springer Handbook of Data Engineering</em> (in press). Springer.
+                        <a href="#" class="pdf-link">[Paper]</a>
+                    </div>
+</div>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- ══ 2022 ══ -->
+    <div class="year-group">
+        <div class="year-label">2022</div>
+        <ul class="pub-list">
+
+            <li class="pub-item">
+                <div class="pub-thumb"><div class="pub-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="#00853E" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div></div>
+                <div>
+                    <div class="pub-title"><span class="badge badge-type">Conference</span>A Review of Intelligent Application of Educational Knowledge Graph from the Perspective of Artificial Intelligence</div>
+                    <div class="pub-meta">Wu, L., <span class="me">Tu, F.</span>, Liu, Q., Ma, X., Jia, X., &amp; Gao, Y.</div>
+                    <div class="pub-venue"><em>2022 International Symposium on Educational Technology (ISET)</em>, pp. 195–199. IEEE.
+                        <a href="https://ieeexplore.ieee.org/document/9867137" class="pdf-link" target="_blank">[Paper]</a>
+                    </div>
+</div>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- ══ 2021 ══ -->
+    <div class="year-group">
+        <div class="year-label">2021</div>
+        <ul class="pub-list">
+
+            <li class="pub-item">
+                <div class="pub-thumb"><img src="images/papers/ICETC-2021.png" alt="paper thumbnail" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"></div>
+                <div>
+                    <div class="pub-title"><span class="badge badge-type">Conference</span>Research on Entity Relation Extraction Based on BiLSTM-CRF Classical Probability Word Problems</div>
+                    <div class="pub-meta">Liu, Q., Jia, X., Yang, W., <span class="me">Tu, F.</span>, &amp; Wu, L.</div>
+                    <div class="pub-venue"><em>Proceedings of the 13th International Conference on Education Technology and Computers</em>, pp. 62–68. ACM.
+                        <a href="https://dl.acm.org/doi/abs/10.1145/3498765.3498775" class="pdf-link" target="_blank">[Paper]</a>
+                    </div>
+</div>
+            </li>
+
+        </ul>
+    </div>
+
+</main>
+
+<footer>
+    <p>Fengjiao Tu · University of North Texas · <a href="mailto:fengjiao@unt.edu">fengjiao@unt.edu</a></p>
+    <p style="margin-top:.3rem;"><a href="#">↑ Back to top</a></p>
+</footer>
+<script data-cfasync="false" src="/cdn
