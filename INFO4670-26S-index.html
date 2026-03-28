@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>INFO 4670 — Fengjiao Tu</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#ffffff;--text:#1c1c1c;--muted:#6b6b6b;--accent:#00853E;--accent-hover:#006B32;--accent-light:#e6f4ed;--border:#e2ddd6;--nav-h:54px;--max-w:900px;}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        html{scroll-behavior:smooth;}
+        body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased;}
+
+        nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);height:var(--nav-h);}
+        .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 1.5rem;height:100%;display:flex;align-items:center;}
+        .nav-brand{font-family:'EB Garamond',serif;font-size:18px;font-weight:600;color:var(--text);text-decoration:none;margin-right:auto;letter-spacing:-.01em;}
+        .nav-brand:hover{color:var(--accent);}
+        .nav-links{display:flex;align-items:center;}
+        .nav-links a{color:var(--muted);text-decoration:none;font-size:13.5px;padding:5px 11px;border-radius:5px;transition:color .15s,background .15s;}
+        .nav-links a:hover{color:var(--accent);background:var(--accent-light);}
+        .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+        .nav-toggle span{display:block;width:22px;height:2px;background:var(--text);margin:4px 0;}
+
+        .page{max-width:var(--max-w);margin:0 auto;padding:2.5rem 1.5rem 5rem;}
+
+        /* COURSE HEADER */
+        .course-header{margin-bottom:2rem;padding-bottom:1.2rem;border-bottom:2px solid var(--accent);}
+        .course-tag{font-size:13px;font-weight:500;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem;}
+        .course-title{font-family:'EB Garamond',serif;font-size:1.9rem;font-weight:500;line-height:1.2;margin-bottom:.5rem;letter-spacing:-.01em;}
+        .course-sub{color:var(--muted);font-size:14px;}
+
+        /* INFO GRID */
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem 2rem;margin-bottom:2rem;padding:1.2rem 1.4rem;background:#f9fdf9;border:1px solid #d4edd9;border-radius:6px;}
+        .info-row{display:flex;flex-direction:column;gap:1px;}
+        .info-label{font-size:11.5px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);}
+        .info-val{font-size:14px;color:var(--text);}
+        .info-val a{color:var(--accent);text-decoration:none;}
+        .info-val a:hover{text-decoration:underline;}
+
+        /* SECTIONS */
+        section{margin-bottom:2.2rem;}
+        section h2{font-family:'EB Garamond',serif;font-size:1.35rem;font-weight:500;color:var(--text);margin-bottom:.8rem;padding-bottom:.3rem;border-bottom:2px solid var(--accent);display:inline-block;letter-spacing:-.01em;}
+        section p{font-size:14.5px;color:#333;line-height:1.75;margin-bottom:.6rem;}
+        section ul{padding-left:1.2rem;font-size:14.5px;color:#333;line-height:1.8;}
+        section ul li{margin-bottom:.2rem;}
+        section a{color:var(--accent);}
+
+        /* SCHEDULE TABLE */
+        .schedule-wrap{overflow-x:auto;}
+        table{width:100%;border-collapse:collapse;font-size:13.5px;}
+        thead tr{background:var(--accent);color:#fff;}
+        thead th{padding:.6rem .9rem;text-align:left;font-weight:500;font-size:13px;}
+        tbody tr{border-bottom:1px solid #ede9e2;}
+        tbody tr:last-child{border-bottom:none;}
+        tbody tr:hover{background:#f7fdf8;}
+        tbody tr.break{background:#fafafa;color:var(--muted);font-style:italic;}
+        td{padding:.55rem .9rem;vertical-align:top;line-height:1.5;}
+        td:first-child{color:var(--muted);font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums;width:52px;}
+        td:nth-child(2){white-space:nowrap;color:var(--muted);font-size:13px;width:70px;}
+        td:nth-child(3){font-weight:500;}
+        .badge-assign{display:inline-block;font-size:11px;background:var(--accent-light);color:var(--accent);padding:1px 7px;border-radius:3px;font-weight:500;margin:1px 2px 1px 0;white-space:nowrap;}
+        .badge-quiz{display:inline-block;font-size:11px;background:#fff8e6;color:#9a6500;padding:1px 7px;border-radius:3px;font-weight:500;margin:1px 2px 1px 0;white-space:nowrap;}
+        .badge-proj{display:inline-block;font-size:11px;background:#fdecea;color:#b02020;padding:1px 7px;border-radius:3px;font-weight:500;margin:1px 2px 1px 0;white-space:nowrap;}
+        .badge-disc{display:inline-block;font-size:11px;background:#f3e8f7;color:#6b21a8;padding:1px 7px;border-radius:3px;font-weight:500;margin:1px 2px 1px 0;white-space:nowrap;}
+
+        /* GRADING TABLE */
+        .grade-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:.5rem;}
+        .grade-table th{text-align:left;padding:.5rem .8rem;background:#f5f5f5;font-weight:500;font-size:13px;color:var(--muted);}
+        .grade-table td{padding:.5rem .8rem;border-bottom:1px solid #ede9e2;}
+        .grade-table tr:last-child td{border-bottom:none;font-weight:500;}
+        .grade-table .pts{text-align:right;font-variant-numeric:tabular-nums;}
+
+        /* POLICIES */
+        .policy-block{margin-bottom:1rem;padding:.8rem 1rem;border-left:3px solid var(--accent-light);background:#fafafa;border-radius:0 4px 4px 0;}
+        .policy-block h3{font-size:14px;font-weight:500;margin-bottom:.3rem;color:var(--text);}
+        .policy-block p{font-size:13.5px;color:#444;line-height:1.7;margin:0;}
+
+        footer{text-align:center;padding:1.8rem 1.5rem;color:var(--muted);font-size:13px;border-top:1px solid var(--border);}
+        footer a{color:var(--accent);text-decoration:none;}
+
+        @media(max-width:640px){
+            .nav-links{display:none;flex-direction:column;position:absolute;top:var(--nav-h);left:0;right:0;background:#fff;border-bottom:1px solid var(--border);padding:.8rem 1rem;}
+            .nav-links.open{display:flex;}
+            .nav-toggle{display:block;}
+            .info-grid{grid-template-columns:1fr 1fr;}
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <div class="nav-inner">
+        <a href="../../index.html" class="nav-brand">Fengjiao Tu</a>
+                        <div class="nav-links" id="navLinks">
+            <a href="../../index.html">Home</a>
+            <a href="../../publications.html">Publications</a>
+            <a href="../../teaching.html" class="active">Teaching</a>
+            <a href="../../service.html">Service</a>
+            <a href="../../blog.html">Blog</a>
+        </div>
+        <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+
+<main class="page">
+
+    <!-- COURSE HEADER -->
+    <div class="course-header">
+        <div class="course-tag">University of North Texas · Spring 2026</div>
+        <h1 class="course-title">INFO 4670: Data Analysis and Knowledge Discovery</h1>
+        <div class="course-sub">College of Information · Department of Information Science · 3 Credit Hours</div>
+    </div>
+
+    <!-- COURSE INFO -->
+    <div class="info-grid">
+        <div class="info-row">
+            <span class="info-label">Instructor</span>
+            <span class="info-val">Fengjiao Tu</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Email</span>
+            <span class="info-val"><a href="mailto:fengjiao@unt.edu">fengjiao@unt.edu</a></span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Office</span>
+            <span class="info-val">Discovery Park, Room E292L</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Office Hours</span>
+            <span class="info-val">
+                Thu 3:00–5:00 PM via Zoom<br>
+                <a href="https://unt.zoom.us/j/86958451137?pwd=sNNA6KeGKCVKahKpIEFXrldajapkTN.1" target="_blank" style="font-size:13px;">Join Zoom Meeting ↗</a><br>
+                <span style="font-size:12px;color:var(--muted);">ID: 869 5845 1137 · Passcode: 967105</span>
+            </span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Format</span>
+            <span class="info-val">Online (Canvas LMS)</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Canvas</span>
+            <span class="info-val"><a href="https://unt.instructure.com/" target="_blank">unt.instructure.com</a></span>
+        </div>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <section>
+        <h2>Course Description</h2>
+        <p>This course introduces students to data analysis, data mining, text mining, and knowledge discovery principles, concepts, theories, and practices. It is designed for aspiring or practicing information professionals and covers the basics of working with data from a hands-on and practical perspective.</p>
+        <p>Classes incorporate lectures, discussion, the practice of learned concepts, and readings. Students will learn how to approach data and data mining tasks using <strong>Python</strong>, and will gain foundational knowledge of data mining and text mining techniques and their business applications.</p>
+    </section>
+
+    <!-- OBJECTIVES -->
+    <section>
+        <h2>Course Objectives</h2>
+        <ul>
+            <li>Participate actively in class and community discussions by analyzing, constructing, and evaluating information from textbooks, readings, and course activities.</li>
+            <li>Understand the fundamental principles, concepts, theories, and practices of data analysis, data mining, and knowledge discovery.</li>
+            <li>Apply acquired knowledge to solve real-world problems using provided datasets and construct bibliographies from scholarly sources.</li>
+            <li>Write a high-quality data analysis report that demonstrates mastery of course content and professional communication standards.</li>
+        </ul>
+    </section>
+
+    <!-- TEXTBOOK -->
+    <section>
+        <h2>Required Textbook</h2>
+        <p><em>Data Mining: Concepts and Techniques</em> (4th ed.) by Jiawei Han, Micheline Kamber, &amp; Jian Pei. The Morgan Kaufmann Series in Data Management Systems.<br>
+        <a href="https://discover.library.unt.edu/catalog/b5874735" target="_blank">UNT Library Link →</a></p>
+    </section>
+
+    <!-- TOOLS -->
+    <section>
+        <h2>Technical Tools</h2>
+        <ul>
+            <li>A personal computer (Windows or Mac) capable of accessing Canvas</li>
+            <li>Microsoft Excel 2013 or above</li>
+            <li>Python via <a href="https://colab.research.google.com/" target="_blank">Google Colab</a></li>
+        </ul>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section>
+        <h2>Course Schedule</h2>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:.8rem;">All assignments due by <strong>Sunday 11:59 PM</strong>. Schedule subject to change; updates announced via Canvas.</p>
+        <div class="schedule-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Module</th>
+                    <th>Assignments</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td><td>Jan 15</td>
+                    <td>Module 1: Course Orientation and Overview — Introduction to data analysis and knowledge discovery</td>
+                    <td><span class="badge-assign">Self-Introduction</span></td>
+                </tr>
+                <tr>
+                    <td>2</td><td>Jan 22</td>
+                    <td>Module 2: Collecting multivariate heterogeneous data</td>
+                    <td><span class="badge-quiz">Quiz 1</span><span class="badge-disc">Discussion 1</span></td>
+                </tr>
+                <tr>
+                    <td>3</td><td>Jan 29</td>
+                    <td>Module 3: Big data and data quality</td>
+                    <td><span class="badge-assign">Assignment 1</span><span class="badge-disc">Discussion 2</span></td>
+                </tr>
+                <tr>
+                    <td>4</td><td>Feb 5</td>
+                    <td>Module 4: Data preprocessing, cleaning, and operation</td>
+                    <td><span class="badge-assign">Assignment 2</span><span class="badge-disc">Discussion 3</span></td>
+                </tr>
+                <tr>
+                    <td>5</td><td>Feb 12</td>
+                    <td>Module 5: Data modeling and database (data structure)</td>
+                    <td><span class="badge-proj">Term Project 1</span><span class="badge-disc">Discussion 4</span></td>
+                </tr>
+                <tr>
+                    <td>6</td><td>Feb 19</td>
+                    <td>Module 6: Mining frequent patterns, associations, and correlations</td>
+                    <td><span class="badge-quiz">Quiz 2</span><span class="badge-disc">Discussion 5</span></td>
+                </tr>
+                <tr>
+                    <td>7</td><td>Feb 26</td>
+                    <td>Module 6: Mining frequent patterns, associations, and correlations (cont.)</td>
+                    <td><span class="badge-assign">Assignment 3</span></td>
+                </tr>
+                <tr>
+                    <td>8</td><td>Mar 5</td>
+                    <td>Module 7: Data mining techniques — Regression</td>
+                    <td><span class="badge-quiz">Quiz 3</span><span class="badge-disc">Discussion 6</span></td>
+                </tr>
+                <tr class="break">
+                    <td>9</td><td>Mar 12</td>
+                    <td>Spring Break — No class</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>10</td><td>Mar 19</td>
+                    <td>Module 7: Data mining techniques — Regression (cont.)</td>
+                    <td><span class="badge-proj">Term Project 2</span></td>
+                </tr>
+                <tr>
+                    <td>11</td><td>Mar 26</td>
+                    <td>Module 8: Data mining techniques — Classification</td>
+                    <td><span class="badge-quiz">Quiz 4</span><span class="badge-disc">Discussion 7</span></td>
+                </tr>
+                <tr>
+                    <td>12</td><td>Apr 2</td>
+                    <td>Module 8: Data mining techniques — Classification (cont.)</td>
+                    <td><span class="badge-assign">Assignment 4</span></td>
+                </tr>
+                <tr>
+                    <td>13</td><td>Apr 9</td>
+                    <td>Module 9: Data mining techniques — Clustering</td>
+                    <td><span class="badge-quiz">Quiz 5</span><span class="badge-disc">Discussion 8</span></td>
+                </tr>
+                <tr>
+                    <td>14</td><td>Apr 16</td>
+                    <td>Module 9: Data mining techniques — Clustering (cont.)</td>
+                    <td><span class="badge-assign">Assignment 5</span></td>
+                </tr>
+                <tr>
+                    <td>15</td><td>Apr 23</td>
+                    <td>Module 10: Time series data analysis</td>
+                    <td><span class="badge-proj">Term Project 3</span></td>
+                </tr>
+                <tr>
+                    <td>16</td><td>Apr 30</td>
+                    <td>Work on Term Project</td>
+                    <td>—</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- GRADING -->
+    <section>
+        <h2>Assessment &amp; Grading</h2>
+        <table class="grade-table">
+            <thead>
+                <tr><th>Component</th><th class="pts">Points</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Self-Introduction</td><td class="pts">10</td></tr>
+                <tr><td>Quizzes 1–5 (30 × 5)</td><td class="pts">150</td></tr>
+                <tr><td>Assignments 1–5 (100 × 5)</td><td class="pts">500</td></tr>
+                <tr><td>Discussions 1–8 (10 × 8)</td><td class="pts">80</td></tr>
+                <tr><td>Term Project 1</td><td class="pts">50</td></tr>
+                <tr><td>Term Project 2</td><td class="pts">110</td></tr>
+                <tr><td>Term Project 3</td><td class="pts">110</td></tr>
+                <tr><td>SPOT (course evaluation)</td><td class="pts">10</td></tr>
+                <tr><td>Extra Credit (TBD)</td><td class="pts">30</td></tr>
+                <tr><td><strong>Total</strong></td><td class="pts"><strong>1050</strong></td></tr>
+            </tbody>
+        </table>
+
+        <p style="margin-top:1rem;font-size:14px;color:var(--muted);">
+            <strong style="color:var(--text);">Grading Scale:</strong>&nbsp;
+            A: 900–1000 &nbsp;|&nbsp; B: 800–899 &nbsp;|&nbsp; C: 700–799 &nbsp;|&nbsp; D: 600–699 &nbsp;|&nbsp; F: 599 and below
+        </p>
+    </section>
+
+    <!-- POLICIES -->
+    <section>
+        <h2>Course Policies</h2>
+
+        <div class="policy-block">
+            <h3>Late Work</h3>
+            <p>Each student has a <strong>one-time excuse</strong> for late submission. Any late work after this excuse will receive a zero automatically. Group work and final project deliverables will not be accepted after the due date under any circumstances. If you have a serious illness or emergency, contact the instructor immediately.</p>
+        </div>
+
+        <div class="policy-block">
+            <h3>Communication</h3>
+            <p>Use <strong>Canvas Messages</strong> for all course-related communication — responses are faster than email. Assignment grades and feedback will be provided within one week of the due date.</p>
+        </div>
+
+        <div class="policy-block">
+            <h3>Academic Integrity</h3>
+            <p>Academic dishonesty (cheating, plagiarism, fabrication, etc.) will not be tolerated. Per UNT Policy 06.003 and Department of Information Science guidelines: <strong>First offense</strong> — zero on the assignment; <strong>Second offense</strong> — grade of F for the course. See <a href="https://informationscience.unt.edu/departmental-guidelines" target="_blank">IS departmental guidelines</a> for details.</p>
+        </div>
+
+        <div class="policy-block">
+            <h3>ADA / Accessibility</h3>
+            <p>UNT makes reasonable academic accommodations for students with disabilities. Register with the <a href="https://disability.unt.edu/" target="_blank">Office of Disability Accommodation (ODA)</a> to receive an accommodation letter, then meet with the instructor at the start of the semester.</p>
+        </div>
+
+        <div class="policy-block">
+            <h3>Technical Difficulties</h3>
+            <p>Contact the <strong>UNT Student Help Desk</strong> for Canvas or technical issues: <a href="mailto:fengjiao@unt.edu">fengjiao@unt.edu</a> · 940-565-2324 · Sage Hall, Room 330. Always obtain a ticket number and notify the instructor promptly.</p>
+        </div>
+    </section>
+
+    <!-- RESOURCES -->
+    <section>
+        <h2>Student Resources</h2>
+        <ul>
+            <li><a href="https://library.unt.edu/" target="_blank">UNT Libraries</a></li>
+            <li><a href="http://writingcenter.unt.edu/" target="_blank">UNT Writing Center</a></li>
+            <li><a href="https://success.unt.edu/asc" target="_blank">Academic Success Center</a></li>
+            <li><a href="https://studentaffairs.unt.edu/counseling-and-testing-services" target="_blank">Counseling and Testing Services</a></li>
+            <li><a href="https://guides.library.unt.edu/citations-style-guides/apa" target="_blank">APA 7th Edition Citation Guide</a></li>
+            <li><a href="https://it.unt.edu/cloudlab" target="_blank">UNT Cloud Lab</a></li>
+        </ul>
+    </section>
+
+</main>
+
+<footer>
+    <p>Fengjiao Tu · University of North Texas · <a href="/cdn-cgi/l/email-protection#adcbc8c3cac7c4ccc2d9d8edc0d483

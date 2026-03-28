@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fengjiao Tu — UNT Information Science</title>
+    <meta name="description" content="Fengjiao Tu, PhD student in Information Science at the University of North Texas.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+        :root {
+            --bg:#ffffff; --bg-card:#ffffff; --text:#1c1c1c; --muted:#6b6b6b;
+            --accent:#00853E; --accent-hover:#006B32; --accent-light:#e6f4ed;
+            --border:#e2ddd6; --nav-h:54px; --max-w:880px;
+        }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        html{scroll-behavior:smooth;}
+        body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased;}
+
+        /* NAV */
+        nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);height:var(--nav-h);}
+        .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 1.5rem;height:100%;display:flex;align-items:center;}
+        .nav-brand{font-family:'EB Garamond',serif;font-size:18px;font-weight:600;color:var(--text);text-decoration:none;margin-right:auto;letter-spacing:-0.01em;}
+        .nav-brand:hover{color:var(--accent);}
+        .nav-links{display:flex;align-items:center;}
+        .nav-links a{color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:400;padding:5px 11px;border-radius:5px;transition:color .15s,background .15s;}
+        .nav-links a:hover{color:var(--accent);background:var(--accent-light);}
+        .nav-links a.active{color:var(--accent);font-weight:500;}
+        .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+        .nav-toggle span{display:block;width:22px;height:2px;background:var(--text);margin:4px 0;transition:transform .2s,opacity .2s;}
+
+        /* HERO */
+        .hero{max-width:var(--max-w);margin:0 auto;padding:3rem 1.5rem 0;}
+        .hero-grid{display:grid;grid-template-columns:180px 1fr;gap:3rem;align-items:start;}
+        .hero-photo img{width:180px;height:210px;object-fit:cover;object-position:top;border-radius:5px;display:block;box-shadow:0 2px 16px rgba(0,0,0,0.10);}
+        .hero-name{font-family:'EB Garamond',serif;font-size:2.5rem;font-weight:500;line-height:1.15;margin-bottom:.5rem;letter-spacing:-0.02em;}
+        .hero-role{color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:1rem;}
+        .hero-role strong{color:var(--text);font-weight:500;}
+        .hero-role a{color:var(--accent);text-decoration:none;}
+        .hero-role a:hover{text-decoration:underline;}
+        .hero-chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.1rem;}
+        .chip{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--accent);border:1px solid #a3d4b8;background:#f0f9f4;padding:4px 13px;border-radius:20px;text-decoration:none;transition:background .15s,color .15s;}
+        .chip:hover{background:var(--accent);color:#fff;border-color:#00853E;}
+        .chip svg{width:14px;height:14px;flex-shrink:0;}
+        .hero-email{font-size:13.5px;color:var(--muted);}
+        .hero-email a{color:var(--accent);text-decoration:none;}
+
+        /* DIVIDER */
+        .divider{max-width:var(--max-w);margin:2.5rem auto 0;border:none;border-top:1px solid var(--border);}
+
+        /* MAIN */
+        .page{max-width:var(--max-w);margin:0 auto;padding:2.5rem 1.5rem 5rem;}
+        section{margin-bottom:2.5rem;}
+        section h2{font-family:'EB Garamond',serif;font-size:1.45rem;font-weight:500;color:var(--text);margin-bottom:1rem;padding-bottom:.35rem;border-bottom:2px solid var(--accent);display:inline-block;letter-spacing:-.01em;}
+
+        /* BIO */
+        .bio{font-size:15px;color:#333;line-height:1.8;margin-top:.2rem;}
+        .bio p+p{margin-top:.75rem;}
+        .bio strong{color:var(--text);}
+        .interest-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem;}
+        .itag{font-size:12.5px;background:var(--accent-light);color:var(--accent);padding:3px 10px;border-radius:3px;font-weight:500;}
+
+        /* NEWS */
+        .news-list{list-style:none;display:flex;flex-direction:column;gap:.1rem;}
+        .news-item{display:grid;grid-template-columns:90px 1fr;gap:.8rem;padding:.65rem 0;border-bottom:1px solid #ede9e2;font-size:14.5px;align-items:baseline;}
+        .news-item:last-child{border-bottom:none;}
+        .news-date{color:var(--muted);font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums;}
+        .news-text a{color:var(--accent);text-decoration:none;}
+        .news-text a:hover{text-decoration:underline;}
+        .badge{display:inline-block;font-size:11px;font-weight:500;padding:2px 7px;border-radius:3px;letter-spacing:.03em;vertical-align:middle;margin-right:4px;}
+        .badge-pub{background:#e6f4ed;color:#00853E;}
+        .badge-award{background:#fff8e6;color:#9a6500;}
+        .badge-talk{background:#e6f4ea;color:#1a7a35;}
+        .badge-new{background:#fdecea;color:#c0392b;}
+        .badge-service{background:#f3e8f7;color:#6b21a8;}
+
+        /* NEWS YEAR GROUPS */
+        .news-year-group{margin-bottom:1.2rem;}
+        .year-header{display:flex;align-items:center;gap:.7rem;cursor:pointer;user-select:none;padding:.4rem 0;margin-bottom:.3rem;}
+        .year-header:hover .year-label{color:var(--accent);}
+        .year-label{font-family:'EB Garamond',serif;font-size:1.15rem;font-weight:500;color:var(--text);transition:color .15s;}
+        .year-toggle{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .15s,transform .2s;}
+        .year-header:hover .year-toggle{border-color:var(--accent);}
+        .year-toggle svg{width:9px;height:9px;stroke:var(--muted);transition:transform .25s;}
+        .year-toggle.open svg{transform:rotate(180deg);}
+        .year-items{overflow:hidden;transition:max-height .3s ease,opacity .25s ease;max-height:0;opacity:0;}
+        .year-items.open{max-height:2000px;opacity:1;}
+        .news-item{display:grid;grid-template-columns:52px 1fr;gap:.8rem;padding:.6rem 0;border-bottom:1px solid #ede9e2;font-size:14.5px;align-items:baseline;}
+        .news-item:last-child{border-bottom:none;}
+        .news-date{color:var(--muted);font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums;}
+        .news-text a{color:var(--accent);text-decoration:none;}
+        .news-text a:hover{text-decoration:underline;}
+
+        /* FOOTER */
+        footer{text-align:center;padding:1.8rem 1.5rem;color:var(--muted);font-size:13px;border-top:1px solid var(--border);}
+        footer a{color:var(--accent);text-decoration:none;}
+
+        /* RESPONSIVE */
+        @media(max-width:640px){
+            .hero-grid{grid-template-columns:1fr;gap:1.5rem;}
+            .hero-photo img{width:130px;height:155px;}
+            .nav-links{display:none;flex-direction:column;position:absolute;top:var(--nav-h);left:0;right:0;background:var(--bg);border-bottom:1px solid var(--border);padding:.8rem 1rem;gap:.2rem;}
+            .nav-links.open{display:flex;}
+            .nav-toggle{display:block;}
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">Fengjiao Tu</a>
+                        <div class="nav-links" id="navLinks">
+            <a href="index.html" class="active">Home</a>
+            <a href="publications.html">Publications</a>
+            <a href="teaching.html">Teaching</a>
+            <a href="service.html">Service</a>
+            <a href="blog.html">Blog</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-grid">
+        <div class="hero-photo">
+            <img src="images/FengjiaoTu.jpg" alt="Fengjiao Tu">
+        </div>
+        <div class="hero-info">
+            <h1 class="hero-name">Fengjiao Tu</h1>
+            <div class="hero-role">
+                <strong>PhD Student</strong>, Information Science (Data Science)<br>
+                <a href="https://idea-lab.unt.edu" target="_blank">IDEA Lab</a> · University of North Texas<br>
+                Advisor: <a href="#" target="_blank">Prof. Haihua Chen</a><br>
+                Lab Manager, IDEA Lab · Teaching Fellow, UNT
+            </div>
+            <div class="hero-chips">
+                <a href="/cdn-cgi/l/email-protection#2a4c4f444d40434b455e5f6a4753045f445e044f4e5f" class="chip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+                    <span class="__cf_email__" data-cfemail="6006050e070a09010f1415200d194e150e144e050415">[email&#160;protected]</span>
+                </a>
+                <a href="https://linkedin.com/in/fengjiao-tu-68316b297/" target="_blank" class="chip">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/fengjiaoya" target="_blank" class="chip">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                    GitHub
+                </a>
+                <a href="#" target="_blank" class="chip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    Google Scholar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="divider">
+
+<main class="page">
+
+    <!-- BIO -->
+    <section>
+        <h2>About</h2>
+        <div class="bio">
+            <p>
+                I am a PhD student in Information Science (Data Science concentration) at the
+                <a href="https://unt.edu" target="_blank">University of North Texas</a>,
+                working in the <a href="https://idea-lab.unt.edu" target="_blank">Intelligent Data Engineering and Analytics (IDEA) Lab</a>
+                under the supervision of Prof. Haihua Chen. I also serve as <strong>Lab Manager</strong> of the IDEA Lab
+                and currently hold a <strong>Teaching Fellow</strong> position at UNT.
+            </p>
+            <p>
+                My research lies at the intersection of <strong>learning analytics</strong>, <strong>AI in education</strong>,
+                and <strong>natural language processing</strong>. I am particularly interested in applying large language models
+                and automated methods to understand learning processes — including cognitive presence, self-regulated learning,
+                and collaborative knowledge construction — in online and blended educational environments.
+            </p>
+            <p>I am also interested in <strong>data quality</strong> for machine learning and NLP pipelines.</p>
+            <div class="interest-tags">
+                <span class="itag">Learning Analytics</span>
+                <span class="itag">AI in Education</span>
+                <span class="itag">NLP / Text Mining</span>
+                <span class="itag">Self-Regulated Learning</span>
+                <span class="itag">Community of Inquiry</span>
+                <span class="itag">Data Quality</span>
+                <span class="itag">MOOCs</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWS -->
+    <section>
+        <h2>News</h2>
+
+        <!-- 2026: open by default (current year) -->
+        <div class="news-year-group">
+            <div class="year-header" onclick="toggleYear('y2026')">
+                <span class="year-label">2026</span>
+                <div class="year-toggle open" id="toggle-y2026">
+                    <svg viewBox="0 0 10 6" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
+                </div>
+            </div>
+            <div class="year-items open" id="y2026">
+                <div class="news-item">
+                    <span class="news-date">Mar</span>
+                    <span class="news-text"><span class="badge badge-service">Service</span>Technical Service Volunteer at <strong>iSchool 2026</strong> — Zoom moderation and technical flow control.</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">Mar</span>
+                    <span class="news-text"><span class="badge badge-pub">Poster</span>Accepted at <strong>ICLS 2026</strong>: <em>Measuring Cognitive Presence in Online Discussions: Interpretable AI and Instructional Insights from a MOOC Context</em>.</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">Feb</span>
+                    <span class="news-text"><span class="badge badge-pub">Poster</span>Accepted at <strong>LAK26</strong>: <em>Beyond Interaction: Validating New Pathways to Success in MOOC-based Microcredentials</em>.</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">Jan</span>
+                    <span class="news-text"><span class="badge badge-pub">Accepted</span>Paper accepted in <strong><em>Smart Learning Environments</em></strong> [IF 4.4]: <em>Rethinking Engagement: How Active Lurkers and Selective Completers Validate New Pathways to Professional MOOC Success</em>.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2025: collapsed -->
+        <div class="news-year-group">
+            <div class="year-header" onclick="toggleYear('y2025')">
+                <span class="year-label">2025</span>
+                <div class="year-toggle" id="toggle-y2025">
+                    <svg viewBox="0 0 10 6" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
+                </div>
+            </div>
+            <div class="year-items" id="y2025">
+                <div class="news-item">
+                    <span class="news-date">Dec</span>
+                    <span class="news-text"><span class="badge badge-award">Award</span>Received <strong>UNT Graduate Student Research Award</strong> ($1,000) for the 2025/2026 academic year.</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">Nov</span>
+                    <span class="news-text"><span class="badge badge-service">Service</span>Joined Program Committee for <strong>EDM 2026</strong> and <strong>ISLS 2026</strong>.</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">Sep</span>
+                    <span class="news-text"><span class="badge badge-pub">Accepted</span>Paper accepted in <strong><em>The Internet and Higher Education</em></strong> [IF 6.8]: <em>Engagement Pathways and Success Factors in a MOOC Certification Program</em>.</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">Jun</span>
+                    <span class="news-text"><span class="badge badge-pub">Published</span>Paper in <strong><em>Computer Standards &amp; Interfaces</em></strong> [IF 3.1]: <em>How AI Agents Transform Reflective Practices: A Three-Semester Comparative Study in SSRL</em>.</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">Apr</span>
+                    <span class="news-text"><span class="badge badge-pub">Published</span>Paper in <strong><em>Journal of Educational Computing Research</em></strong> [IF 4.9]: <em>Unpacking the Effects of Role Assignment on Interaction Processes in SSRL</em>.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2024: collapsed -->
+        <div class="news-year-group">
+            <div class="year-header" onclick="toggleYear('y2024')">
+                <span class="year-label">2024</span>
+                <div class="year-toggle" id="toggle-y2024">
+                    <svg viewBox="0 0 10 6" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
+                </div>
+            </div>
+            <div class="year-items" id="y2024">
+                <div class="news-item">
+                    <span class="news-date">Nov</span>
+                    <span class="news-text"><span class="badge badge-award">Award</span>Received <strong>Lis and Philip Turner Outstanding Student Paper/Project Award</strong>, UNT.</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">Aug</span>
+                    <span class="news-text"><span class="badge badge-pub">Published</span>Conference paper at <strong>IEEE AITest 2024</strong>: <em>A Survey on Data Quality Dimensions and Tools for Machine Learning</em> [Invited Paper].</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">May</span>
+                    <span class="news-text"><span class="badge badge-award">Award</span>Received <strong>UNT Graduate Student Research Award</strong> ($1,000) for the 2024/2025 academic year.</span>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>Fengjiao Tu &nbsp;·&nbsp; University of North Texas &nbsp;·&nbsp; <a href="mailto:fengjiao@unt.edu">fengjiao@unt.edu</a></p>
+    <p style="margin-top:.3rem;"><a href="#">↑ Back to top</a></p>
+</footer>
+
+<script>
+    document.getElementById('navToggle').addEventListener('click', function() {
+        document.ge
